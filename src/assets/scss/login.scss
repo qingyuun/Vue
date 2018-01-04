@@ -1,0 +1,22 @@
+
+.login {
+  
+  position: relative;
+
+  .logo {
+    position: absolute;
+    top: 80px;
+    left: 80px;
+  }
+
+  .login-content {
+    margin-top: 30%;
+    padding:0 80px;
+
+    h1 {
+      font-size: 30px;
+      font-weight: 300;
+      color: #4e5a64;
+    }
+  }
+}
