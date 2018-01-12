@@ -116,7 +116,7 @@ export default {
           }
           let formData = JSON.stringify(this.login)
           let data = JSON.parse(formData)
-          this.axios.post('http://oacore.dev.jingshonline.net/api/TokenAuth/Authenticate', data, {headers: {'Abp.TenantId': 1}})
+          this.axios.post('/TokenAuth/Authenticate', data, {headers: {'Abp.TenantId': 1}})
           .then((response) => {
             if (response.status === 200) {
               that.$cookies.set('token', response.data.result.accessToken)

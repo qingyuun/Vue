@@ -19,9 +19,13 @@ router.beforeEach((to, from, next) => {
   Util.title(to.meta.title)
   if (!Cookies.get('token') && to.name !== 'login') {
     // 判断是否已经登录且前往的页面不是登录页
-    next({
-      name: 'login'
-    })
+    if (to.name === 'login') {
+      next({
+        name: 'login'
+      })
+    } else {
+      Util.toDefaultPage([...routers], to.name, router, next)
+    }
   } else if (Cookies.get('token') && to.name === 'login') {
     // 判断是否已经登录且前往的是登录页
     Util.title()
