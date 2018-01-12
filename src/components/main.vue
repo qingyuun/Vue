@@ -38,11 +38,11 @@
                                     <Icon type="arrow-down-b"></Icon>
                                 </a>
                                 <DropdownMenu slot="list">
-                                    <DropdownItem name="ownSpace">个人中心</DropdownItem>
-                                    <DropdownItem name="loginout" divided>退出登录</DropdownItem>
+                                  <DropdownItem name="ownSpace">个人中心</DropdownItem>
+                                  <DropdownItem name="loginout" divided>退出登录</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
-                            <Avatar :src="avatorPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
+                            <Avatar :src="avatar" style="background: #619fe7;margin-left: 10px;"></Avatar>
                         </Row>
                     </div>
                 </div>
@@ -76,6 +76,7 @@ export default {
     return {
       shrink: false,
       userName: '',
+      avatar: '',
       isFullScreen: false,
       openedSubmenuArr: this.$store.state.app.openedSubmenuArr
     }
@@ -89,9 +90,6 @@ export default {
     },
     currentPath () {
       return this.$store.state.app.currentPath // 当前面包屑数组
-    },
-    avatorPath () {
-      return localStorage.avatorImgPath
     },
     cachePage () {
       return this.$store.state.app.cachePage
@@ -113,7 +111,7 @@ export default {
       if (pathArr.length >= 2) {
         this.$store.commit('addOpenSubmenu', pathArr[1].name)
       }
-      this.userName = 'admin'
+      // this.userName = 'admin'
       let messageCount = 3
       this.messageCount = messageCount.toString()
       this.checkTag(this.$route.name)
@@ -188,6 +186,16 @@ export default {
   created () {
     // 显示打开的页面的列表
     this.$store.commit('setOpenedList')
+    this.axios.get('/services/app/Session/GetCurrentLoginInformations')
+      .then(response => {
+        if (response.status === 200) {
+          // 成功后操作
+          this.userName = response.data.result.user.userName
+          this.avatar = 'http://cdn.easyfast.cn/oa/uploadfiles/user/avatar/2017/11/27/b2903567e91e485684d3b249246174f0.png'
+        } else {
+          // 由后端抛出的错误
+        }
+      })
   }
 }
 </script>

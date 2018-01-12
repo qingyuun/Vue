@@ -33,9 +33,11 @@ const app = {
     dontCache: ['text-editor', 'artical-publish'] // 在这里定义你不想要缓存的页面的name属性值(参见路由配置router.js)
   },
   mutations: {
+    // 设置tag列表
     setTagsList (state, list) {
       state.tagsList.push(...list)
     },
+    // 更新菜单列表
     updateMenulist (state) {
       let accessCode = parseInt(Cookies.get('token'))
       let menuList = []
@@ -82,12 +84,15 @@ const app = {
       })
       state.menuList = menuList
     },
+    // 更改菜单主题
     changeMenuTheme (state, theme) {
       state.menuTheme = theme
     },
+    // 更改主题
     changeMainTheme (state, mainTheme) {
       state.themeColor = mainTheme
     },
+    // 添加打开子菜单
     addOpenSubmenu (state, name) {
       let hasThisName = false
       let isEmpty = false
@@ -101,6 +106,7 @@ const app = {
         state.openedSubmenuArr.push(name)
       }
     },
+    // 关闭页面
     closePage (state, name) {
       state.cachePage.forEach((item, index) => {
         if (item === name) {
@@ -108,11 +114,13 @@ const app = {
         }
       })
     },
+    // 打卡页面
     initCachepage (state) {
       if (localStorage.cachePage) {
         state.cachePage = JSON.parse(localStorage.cachePage)
       }
     },
+    // 移除tag标签
     removeTag (state, name) {
       state.pageOpenedList.map((item, index) => {
         if (item.name === name) {
@@ -120,6 +128,7 @@ const app = {
         }
       })
     },
+    // 打开页面列表
     pageOpenedList (state, get) {
       let openedPage = state.pageOpenedList[get.index]
       if (get.argu) {
@@ -131,11 +140,13 @@ const app = {
       state.pageOpenedList.splice(get.index, 1, openedPage)
       localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList)
     },
+    // 关闭所有打开tag标签页面
     clearAllTags (state) {
       state.pageOpenedList.splice(1)
       state.cachePage.length = 0
       localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList)
     },
+    // 关闭其他的tag标签页面
     clearOtherTags (state, vm) {
       let currentName = vm.$route.name
       let currentIndex = 0
@@ -156,30 +167,38 @@ const app = {
       state.cachePage = newCachepage
       localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList)
     },
+    // 设置打开列表
     setOpenedList (state) {
       state.pageOpenedList = localStorage.pageOpenedList
         ? JSON.parse(localStorage.pageOpenedList)
         : [otherRouter.children[0]]
     },
+    // 设置当前打开路径
     setCurrentPath (state, pathArr) {
       state.currentPath = pathArr
     },
+    // 设置当前打开页面name
     setCurrentPageName (state, name) {
       state.currentPageName = name
     },
+    // 设置头像
     setAvator (state, path) {
       localStorage.avatorImgPath = path
     },
+    // 语言开关
     switchLang (state, lang) {
       state.lang = lang
       Vue.config.lang = lang
     },
+    // 清除打开菜单
     clearOpenedSubmenu (state) {
       state.openedSubmenuArr.length = 0
     },
+    // 设置消息提醒数量
     setMessageCount (state, count) {
       state.messageCount = count
     },
+    // 增加标签
     increateTag (state, tagObj) {
       if (!Util.oneOf(tagObj.name, state.dontCache)) {
         state.cachePage.push(tagObj.name)

@@ -7,6 +7,7 @@ util.title = function (title) {
   window.document.title = title
 }
 
+// 设置ajax 请求地址
 const ajaxUrl =
   env === 'development'
     ? 'http://127.0.0.1:8888'
@@ -34,7 +35,7 @@ util.oneOf = function (ele, targetArr) {
     return false
   }
 }
-
+// 展示当前路由
 util.showThisRoute = function (itAccess, currentAccess) {
   if (typeof itAccess === 'object' && Array.isArray(itAccess)) {
     return util.oneOf(currentAccess, itAccess)
@@ -42,7 +43,7 @@ util.showThisRoute = function (itAccess, currentAccess) {
     return itAccess === currentAccess
   }
 }
-
+// 通过name获取路由地址
 util.getRouterObjByName = function (routers, name) {
   if (!name || !routers || !routers.length) {
     return null
@@ -60,7 +61,7 @@ util.getRouterObjByName = function (routers, name) {
   }
   return null
 }
-
+// 设置title
 util.handleTitle = function (vm, item) {
   if (typeof item.title === 'object') {
     // return vm.$t(item.title.i18n)
@@ -68,7 +69,7 @@ util.handleTitle = function (vm, item) {
     return item.title
   }
 }
-
+// 设置当前路径
 util.setCurrentPath = function (vm, name) {
   let title = ''
   let isOtherRouter = false
@@ -190,9 +191,17 @@ util.setCurrentPath = function (vm, name) {
 
   return currentPathArr
 }
-
+/**
+ * 打开新页面
+ * @param {*} vm
+ * @param {*} name //页面name
+ * @param {*} argu
+ * @param {*} query
+ */
 util.openNewPage = function (vm, name, argu, query) {
+  // 已打开页面列表
   let pageOpenedList = vm.$store.state.app.pageOpenedList
+  // 打开页面数量
   let openedPageLen = pageOpenedList.length
   let i = 0
   let tagHasOpened = false
@@ -231,7 +240,7 @@ util.openNewPage = function (vm, name, argu, query) {
   }
   vm.$store.commit('setCurrentPageName', name)
 }
-
+// 地址没有子页面地址前往默认页面
 util.toDefaultPage = function (routers, name, route, next) {
   let len = routers.length
   let i = 0

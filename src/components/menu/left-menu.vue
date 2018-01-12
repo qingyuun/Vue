@@ -53,8 +53,10 @@ export default {
     }
   },
   updated () {
+    // 监听菜单更新事件
     this.$nextTick(() => {
       if (this.$refs.sideMenu) {
+        
         this.$refs.sideMenu.updateOpened()
       }
     })

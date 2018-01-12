@@ -4,8 +4,8 @@ import {router} from './router/router'
 import Cookies from 'js-cookie'
 
 // axios 配置
-axios.defaults.timeout = 5000
-axios.defaults.baseURL = 'https://api.github.com'
+axios.defaults.timeout = 5000 // 请求超时
+// axios.defaults.baseURL = 'http://www.baidu.com' // axios 请求地址
 
 // http request 拦截器
 axios.interceptors.request.use(

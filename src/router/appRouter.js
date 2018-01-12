@@ -22,6 +22,17 @@ export const findpassword = {
   }
 }
 
+export const register = {
+  path: '/register',
+  name: 'register',
+  meta: {
+    title: 'register - 注册账号'
+  },
+  component: resolve => {
+    require(['@/components/register.vue'], resolve)
+  }
+}
+
 export const otherRouter = {
   path: '/',
   name: 'otherRouter',
@@ -114,4 +125,4 @@ export const appRouter = [
   }
 ]
 
-export const routers = [login, findpassword, ...appRouter, otherRouter]
+export const routers = [login, register, findpassword, ...appRouter, otherRouter]
