@@ -68,9 +68,9 @@ import breadcrumbNav from './breadcrumb-nav.vue'
 
 export default {
   components: {
-    shrinkableMenu,
-    breadcrumbNav,
-    tagsPageOpened
+    shrinkableMenu, // 收缩菜单
+    breadcrumbNav, // 面包屑导航
+    tagsPageOpened // tag 标签选项卡
   },
   data () {
     return {
@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     menuList () {
-      return this.$store.state.app.menuList
+      return this.$store.state.app.menuList // 菜单列表
     },
     pageTagsList () {
       return this.$store.state.app.pageOpenedList // 打开的页面的页面对象
@@ -92,16 +92,16 @@ export default {
       return this.$store.state.app.currentPath // 当前面包屑数组
     },
     cachePage () {
-      return this.$store.state.app.cachePage
+      return this.$store.state.app.cachePage // 页面缓存
     },
     lang () {
-      return this.$store.state.app.lang
+      return this.$store.state.app.lang // 语言
     },
     menuTheme () {
-      return this.$store.state.app.menuTheme
+      return this.$store.state.app.menuTheme // 主题
     },
     mesCount () {
-      return this.$store.state.app.messageCount
+      return this.$store.state.app.messageCount // 消息数量
     }
   },
   methods: {
@@ -185,17 +185,17 @@ export default {
   },
   created () {
     // 显示打开的页面的列表
-    this.$store.commit('setOpenedList')
-    this.axios.get('/services/app/Session/GetCurrentLoginInformations')
-      .then(response => {
-        if (response.status === 200) {
-          // 成功后操作
-          this.userName = response.data.result.user.userName
-          this.avatar = 'http://cdn.easyfast.cn/oa/uploadfiles/user/avatar/2017/11/27/b2903567e91e485684d3b249246174f0.png'
-        } else {
-          // 由后端抛出的错误
-        }
-      })
+    // this.$store.commit('setOpenedList')
+    // this.axios.get('/services/app/Session/GetCurrentLoginInformations')
+    //   .then(response => {
+    //     if (response.status === 200) {
+    //       // 成功后操作
+    //       this.userName = response.data.result.user.userName
+    //       this.avatar = 'http://cdn.easyfast.cn/oa/uploadfiles/user/avatar/2017/11/27/b2903567e91e485684d3b249246174f0.png'
+    //     } else {
+    //       // 由后端抛出的错误
+    //     }
+    //   })
   }
 }
 </script>
